@@ -1,26 +1,275 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #060505;
+  --ink-light: #0B0909;
+  --ink-lighter: #131010;
+  --champagne: #C6B79C;
+  --champagne-light: #DED3BE;
+  --champagne-dark: #9C8C74;
+  --gold: #B59B72;
+  --gold-light: #CDB68F;
+  --gold-dark: #7E6B4E;
+  --pearl: #F6F2EC;
+  --pearl-dim: #D9D2C8;
+  --pearl-muted: #9E968C;
+  --hairline: rgba(181, 155, 114, 0.14);
+  --hairline-soft: rgba(181, 155, 114, 0.07);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--ink);
+  --color-foreground: var(--pearl);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --color-ink: var(--ink);
+  --color-ink-light: var(--ink-light);
+  --color-ink-lighter: var(--ink-lighter);
+  --color-champagne: var(--champagne);
+  --color-champagne-light: var(--champagne-light);
+  --color-champagne-dark: var(--champagne-dark);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-pearl: var(--pearl);
+  --color-pearl-dim: var(--pearl-dim);
+  --color-pearl-muted: var(--pearl-muted);
+  --color-hairline: var(--hairline);
+  --color-hairline-soft: var(--hairline-soft);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--hairline-soft);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ink);
+  color: var(--pearl);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
+
+::selection {
+  background-color: var(--gold);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+::-webkit-scrollbar-corner { background: var(--ink); }
+
+.font-serif-display {
+  font-family: var(--font-serif), Georgia, serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+/* ── Etiqueta editorial: versalitas espaciadas ────────────── */
+.label-editorial {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 0.625rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--champagne-dark);
+}
+
+.text-champagne-gradient {
+  background: linear-gradient(100deg, var(--champagne-light), var(--champagne) 45%, var(--champagne-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Hairlines ────────────────────────────────────────────── */
+.rule-x {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hairline), transparent);
+}
+
+/* ── Botones ──────────────────────────────────────────────── */
+.btn-outline {
+  position: relative;
+  color: var(--pearl);
+  border: 1px solid var(--hairline);
+  background: transparent;
+  transition: border-color 0.5s ease, color 0.5s ease, background-color 0.5s ease;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--champagne-light);
+  background-color: rgba(181, 155, 114, 0.04);
+}
+
+.btn-fill {
+  position: relative;
+  color: var(--ink);
+  background: var(--pearl);
+  border: 1px solid var(--pearl);
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
+.btn-fill:hover {
+  background: var(--champagne-light);
+  border-color: var(--champagne-light);
+}
+
+.btn-bare {
+  color: var(--champagne-dark);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+.btn-bare:hover {
+  color: var(--champagne-light);
+  border-color: var(--hairline);
+}
+
+/* ── Navegación ───────────────────────────────────────────── */
+.nav-link {
+  position: relative;
+  color: var(--pearl-muted);
+  transition: color 0.45s ease;
+  padding: 0.5rem 0;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.nav-link:hover,
+.nav-link.active { color: var(--pearl); }
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+
+.link-fine {
+  position: relative;
+  color: var(--pearl-muted);
+  transition: color 0.45s ease;
+}
+.link-fine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.link-fine:hover { color: var(--champagne-light); }
+.link-fine:hover::after { width: 100%; }
+
+/* ── Campos de formulario ─────────────────────────────────── */
+.field {
+  background: transparent;
+  color: var(--pearl);
+  border: 1px solid var(--hairline);
+  transition: border-color 0.45s ease;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.field::placeholder { color: var(--pearl-muted); opacity: 0.55; }
+
+/* ── Superficies ──────────────────────────────────────────── */
+.veil {
+  background: var(--ink-light);
+  border: 1px solid var(--hairline-soft);
+}
+
+.overlay-dim {
+  background: rgba(6, 5, 5, 0.96);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ── Movimiento ───────────────────────────────────────────── */
+@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+@keyframes rise { from { opacity: 0; transform: translateY(18px) } to { opacity: 1; transform: none } }
+@keyframes letter-in {
+  from { opacity: 0; letter-spacing: 0.9em; filter: blur(6px) }
+  to { opacity: 1; filter: blur(0) }
+}
+@keyframes rule-in { from { width: 0 } to { width: 8rem } }
+@keyframes stroke-in { from { stroke-dashoffset: 1 } to { stroke-dashoffset: 0 } }
+@keyframes fade-slow { 0%, 100% { opacity: 0.35 } 50% { opacity: 0.7 } }
+
+.animate-fade-in { animation: fade-in 0.9s ease-out both; }
+.animate-rise { animation: rise 1s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+
+.logo-word {
+  animation: letter-in 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  padding-left: 0.34em;
+}
+.logo-rule {
+  animation: rule-in 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) 1.1s both;
+}
+.logo-bottle {
+  animation: fade-slow 4s ease-in-out 1.6s infinite;
+}
+.logo-bottle > * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: stroke-in 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.logo-bottle > *:nth-child(2) { animation-delay: 1.8s }
+.logo-bottle > *:nth-child(3) { animation-delay: 2s }
+.logo-bottle > *:nth-child(4) { animation-delay: 2.7s }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .logo-bottle > * { stroke-dashoffset: 0; }
+}
+
+/* ── Utilidades ───────────────────────────────────────────── */
+.hairline-t { border-top: 1px solid var(--hairline-soft); }
+.hairline-b { border-bottom: 1px solid var(--hairline-soft); }
+
+.gold-hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+.image-reveal {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink-lighter);
+}
+.image-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(6, 5, 5, 0.55) 100%);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.group:hover .image-reveal::after { opacity: 1; }
+
+.text-balance { text-wrap: balance; }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
